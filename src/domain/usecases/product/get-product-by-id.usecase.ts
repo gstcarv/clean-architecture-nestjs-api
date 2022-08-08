@@ -1,4 +1,5 @@
-import { ControllerHandler } from 'src/application/protocols/controller-handler';
-import { Product } from 'src/domain/models/product.model';
+import { Product } from 'src/infra/db/mongodb/entities/product.entity';
 
-export abstract class GetProductByIdUseCase extends ControllerHandler<Product> {}
+export abstract class GetProductByIdUseCase {
+    abstract perform: (id: string) => Promise<Product>;
+}

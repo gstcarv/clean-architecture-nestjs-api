@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
-import { DbGetProductByIdUseCase } from 'src/data/usecases/db/product/db-get-product-by-id.usecase';
-import { GetProductByIdUseCase } from 'src/domain/usecases/product/get-product-by-id.usecase';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProductHandlerModule } from 'src/application/handlers/product-handler.module';
+import { config } from '../config';
 import { ProductsController } from '../controllers/products.controller';
 
 @Module({
-    imports: [],
-    controllers: [ProductsController],
-    providers: [
-        { provide: GetProductByIdUseCase, useClass: DbGetProductByIdUseCase },
+    imports: [
+        ConfigModule.forRoot({ load: [config] }),
+        TypeOrmModule.forRoot(config().database.getConnectionOptions()),
+        ProductHandlerModule,
     ],
+    controllers: [ProductsController],
 })
 export class AppModule {}

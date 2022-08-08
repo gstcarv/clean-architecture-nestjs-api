@@ -6,7 +6,7 @@ import { GetProductByIdUseCase } from 'src/domain/usecases/product/get-product-b
 export class DbGetProductByIdUseCase implements GetProductByIdUseCase {
     constructor(private readonly productRepository: ProductRepository) {}
 
-    perform(id: string) {
+    async perform(id: string) {
         return this.productRepository.getById(id);
     }
 }

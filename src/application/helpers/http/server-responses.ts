@@ -20,3 +20,13 @@ export const forbidden = (error: Error): HttpResponse<Error> => ({
     statusCode: HttpStatusCodes.FORBIDDEN,
     data: error,
 });
+
+export const notFound = (error: Error): HttpResponse<Error> => ({
+    statusCode: HttpStatusCodes.NOT_FOUND,
+    data: error,
+});
+
+export const noContent = (error: Error): HttpResponse<Error> => ({
+    statusCode: HttpStatusCodes.NO_CONTENT,
+    data: error,
+});

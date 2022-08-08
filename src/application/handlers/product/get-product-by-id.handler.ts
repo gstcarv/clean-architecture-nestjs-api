@@ -1,23 +1,28 @@
 import { Injectable } from '@nestjs/common';
+import { EntityNotFoundError } from 'src/application/errors/EntityNotFoundError';
+import { Product } from 'src/domain/models/product.model';
 import { GetProductByIdUseCase } from 'src/domain/usecases/product/get-product-by-id.usecase';
-import { Product } from 'src/infra/db/mongodb/entities/product.entity';
 import { HttpRequestData } from '../../helpers/http/http-request-data';
 import { HttpResponse } from '../../helpers/http/http-response';
-import { ok } from '../../helpers/http/server-responses';
+import { notFound, ok } from '../../helpers/http/server-responses';
 import { ControllerHandler } from '../../protocols/controller-handler';
 
 @Injectable()
-export class GetProductByIdHandler implements ControllerHandler<Product> {
+export class GetProductByIdHandler implements ControllerHandler {
     constructor(private readonly getProductByIdUC: GetProductByIdUseCase) {}
 
     async execute(
         request: GetProductByIdHandler.RequestData,
-    ): Promise<HttpResponse<Product>> {
-        const httpResponse = await this.getProductByIdUC.perform(
+    ): Promise<HttpResponse> {
+        const foundProduct = await this.getProductByIdUC.perform(
             request.params.id,
         );
 
-        return ok(httpResponse);
+        if (!foundProduct) {
+            return notFound(new EntityNotFoundError());
+        }
+
+        return ok(foundProduct);
     }
 }
 

@@ -1,3 +1,4 @@
+import { HttpException } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { HttpRequestData } from 'src/application/helpers/http/http-request-data';
 import { ControllerHandler } from 'src/application/protocols/controller-handler';
@@ -13,7 +14,13 @@ export class NestRouteAdapter {
 
             const { data, statusCode } = await handler.execute(httpRequest);
 
-            res.json(data).status(statusCode);
+            if (data instanceof Error) {
+                const { name, message } = data;
+
+                throw new HttpException({ name, message }, statusCode);
+            }
+
+            return res.json(data).status(statusCode);
         };
     }
 }

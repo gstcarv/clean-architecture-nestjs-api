@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { FullProductResponse } from 'src/application/dto/product/FullProductResponse';
 import { EntityNotFoundError } from 'src/application/errors/EntityNotFoundError';
 import { GetProductByIdUseCase } from 'src/domain/usecases/product/get-product-by-id.usecase';
 import { HttpRequestData } from '../../helpers/http/http-request-data';
@@ -21,7 +22,7 @@ export class GetProductByIdHandler implements ControllerHandler {
             return notFound(new EntityNotFoundError());
         }
 
-        return ok(foundProduct);
+        return ok(FullProductResponse.fromEntity(foundProduct));
     }
 }
 

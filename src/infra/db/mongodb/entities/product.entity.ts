@@ -3,6 +3,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    ObjectID,
     ObjectIdColumn,
     UpdateDateColumn,
 } from 'typeorm';
@@ -10,7 +11,7 @@ import {
 @Entity()
 export class Product {
     @ObjectIdColumn()
-    id: string;
+    _id: ObjectID;
 
     @Column()
     name: string;

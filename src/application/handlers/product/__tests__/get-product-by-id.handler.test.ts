@@ -4,8 +4,9 @@ import { createMock } from 'ts-jest-mock';
 import { productMock } from 'src/tests/products/product.mock';
 import { HttpStatusCodes } from 'src/application/helpers/http/http-status-codes';
 import { EntityNotFoundError } from 'src/application/errors/EntityNotFoundError';
+import { FullProductResponse } from 'src/application/dto/product/FullProductResponse';
 
-describe('Get product by ID handle', () => {
+describe('Get product by ID handler', () => {
     beforeEach(() => setup());
 
     let getProductByIdHandler: GetProductByIdHandler;
@@ -31,6 +32,7 @@ describe('Get product by ID handle', () => {
         expect(getProductByIdUCMock.perform).toHaveBeenCalledWith('1');
         expect(response.statusCode).toBe(HttpStatusCodes.OK);
         expect(response.data.name).toBe('mock-product-name');
+        expect(response.data).toBeInstanceOf(FullProductResponse);
     });
 
     test('it should return Not Found response if product was not found', async () => {

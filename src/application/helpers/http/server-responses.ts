@@ -13,20 +13,23 @@ export const created = <T = unknown>(data: T): HttpResponse<T> => ({
 
 export const badRequest = (error: Error): HttpResponse<Error> => ({
     statusCode: HttpStatusCodes.BAD_REQUEST,
-    data: error,
+    error: {
+        name: error.name,
+        message: error.message,
+    },
 });
 
 export const forbidden = (error: Error): HttpResponse<Error> => ({
     statusCode: HttpStatusCodes.FORBIDDEN,
-    data: error,
+    error,
 });
 
 export const notFound = (error: Error): HttpResponse<Error> => ({
     statusCode: HttpStatusCodes.NOT_FOUND,
-    data: error,
+    error,
 });
 
 export const noContent = (error: Error): HttpResponse<Error> => ({
     statusCode: HttpStatusCodes.NO_CONTENT,
-    data: error,
+    error,
 });

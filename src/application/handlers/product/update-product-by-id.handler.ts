@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { FullProductResponse } from 'src/application/dto/product/FullProductResponse';
 import { SaveProductRequest } from 'src/application/dto/product/SaveProductRequest';
-import { EntityNotFoundError } from 'src/application/errors/EntityNotFoundError';
+import { SaveProductValidator } from 'src/application/validation/schemas/products/save-product.validator';
 import { UpdateProductByIdUseCase } from 'src/domain/usecases/product/update-product-by-id.usecase';
+import { ValidationHandler } from 'src/validation/validation-executer';
 import { HttpRequestData } from '../../helpers/http/http-request-data';
 import { HttpResponse } from '../../helpers/http/http-response';
-import { notFound, ok } from '../../helpers/http/server-responses';
+import { ok } from '../../helpers/http/server-responses';
 import { ControllerHandler } from '../../protocols/controller-handler';
 
 @Injectable()
@@ -24,6 +25,10 @@ export class UpdateProductByIdHandler implements ControllerHandler {
         );
 
         return ok(FullProductResponse.fromEntity(updatedProduct));
+    }
+
+    validate(request: UpdateProductByIdHandler.RequestData): ValidationHandler {
+        return new SaveProductValidator().build(request);
     }
 }
 

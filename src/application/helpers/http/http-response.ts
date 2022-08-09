@@ -2,5 +2,6 @@ import { HttpStatusCodes } from './http-status-codes';
 
 export type HttpResponse<TResponseData = any> = {
     statusCode: HttpStatusCodes;
-    data: TResponseData;
+    data?: TResponseData;
+    error?: TResponseData;
 };

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { FullProductResponse } from 'src/application/dto/product/FullProductResponse';
 import { EntityNotFoundError } from 'src/application/errors/EntityNotFoundError';
 import { GetProductByIdUseCase } from 'src/domain/usecases/product/get-product-by-id.usecase';
+import { ValidationHandler } from 'src/validation/validation-executer';
 import { HttpRequestData } from '../../helpers/http/http-request-data';
 import { HttpResponse } from '../../helpers/http/http-response';
 import { notFound, ok } from '../../helpers/http/server-responses';
@@ -23,6 +24,10 @@ export class GetProductByIdHandler implements ControllerHandler {
         }
 
         return ok(FullProductResponse.fromEntity(foundProduct));
+    }
+
+    validate(): ValidationHandler {
+        return null;
     }
 }
 

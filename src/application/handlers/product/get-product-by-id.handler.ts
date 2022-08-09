@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { EntityNotFoundError } from 'src/application/errors/EntityNotFoundError';
-import { Product } from 'src/domain/models/product.model';
 import { GetProductByIdUseCase } from 'src/domain/usecases/product/get-product-by-id.usecase';
 import { HttpRequestData } from '../../helpers/http/http-request-data';
 import { HttpResponse } from '../../helpers/http/http-response';

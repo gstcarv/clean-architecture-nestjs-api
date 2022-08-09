@@ -1,6 +1,6 @@
-import HttpStatusCodes from './http-status-codes';
+import { HttpStatusCodes } from './http-status-codes';
 
-export type HttpResponse<TResponseData = unknown> = {
+export type HttpResponse<TResponseData = any> = {
     statusCode: HttpStatusCodes;
     data: TResponseData;
 };

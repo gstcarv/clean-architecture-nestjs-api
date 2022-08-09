@@ -22,12 +22,12 @@ export class Product {
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP(6)',
     })
-    createdAt: number;
+    createdAt: Date;
 
     @UpdateDateColumn({
         type: 'timestamp',
         default: () => 'CURRENT_TIMESTAMP(6)',
         onUpdate: 'CURRENT_TIMESTAMP(6)',
     })
-    updatedAt: number;
+    updatedAt: Date;
 }

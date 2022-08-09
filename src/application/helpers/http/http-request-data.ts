@@ -1,11 +1,11 @@
 type HttpGetRequestData<TParams = unknown, TQuery = unknown> = {
-    query: TQuery;
-    params: TParams;
+    query?: TQuery;
+    params?: TParams;
 };
 
 type HttpPostRequestData<TBody = unknown, TParams = unknown> = {
-    body: TBody;
-    params: TParams;
+    body?: TBody;
+    params?: TParams;
 };
 
 export type HttpRequestData<

@@ -1,5 +1,5 @@
 import { HttpResponse } from './http-response';
-import HttpStatusCodes from './http-status-codes';
+import { HttpStatusCodes } from './http-status-codes';
 
 export const ok = <T = unknown>(data: T): HttpResponse<T> => ({
     statusCode: HttpStatusCodes.OK,

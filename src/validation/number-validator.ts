@@ -1,11 +1,11 @@
 import { ValidationError } from 'src/application/errors/ValidationError';
 import { Validation } from 'src/application/protocols/validation';
 
-export class LengthValidator extends Validation<LengthValidator.Options> {
+export class NumberValidator extends Validation<NumberValidator.Options> {
     constructor(
         private readonly field: string,
-        private readonly input: LengthValidator.InputType,
-        private readonly options: LengthValidator.Options,
+        private readonly input: NumberValidator.InputType,
+        private readonly options: NumberValidator.Options,
     ) {
         super(field, input, options);
     }
@@ -14,15 +14,15 @@ export class LengthValidator extends Validation<LengthValidator.Options> {
         const { min, max } = this.options;
 
         const validationError = new ValidationError(
-            LengthValidator.name,
-            `Field "${this.field}" must have length between ${min} and ${max}`,
+            NumberValidator.name,
+            `Field "${this.field}" must be a valid number between ${min} and ${max}`,
         );
 
-        if (typeof this.input !== 'string' && !Array.isArray(this.input)) {
+        if (typeof this.input !== 'number') {
             return validationError;
         }
 
-        if (this.input.length > max || this.input.length < min) {
+        if (this.input < min || this.input > max) {
             return validationError;
         }
 
@@ -30,8 +30,8 @@ export class LengthValidator extends Validation<LengthValidator.Options> {
     }
 }
 
-namespace LengthValidator {
-    export type InputType = string | unknown[];
+namespace NumberValidator {
+    export type InputType = number;
 
     export type Options = {
         min: number;

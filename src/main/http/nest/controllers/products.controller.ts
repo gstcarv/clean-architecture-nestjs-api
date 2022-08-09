@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Req, Res } from '@nestjs/common';
 import { CreateProductHandler } from 'src/application/handlers/product/create-product.handler';
 import { GetProductByIdHandler } from 'src/application/handlers/product/get-product-by-id.handler';
 import { UpdateProductByIdHandler } from 'src/application/handlers/product/update-product-by-id.handler';
-import { NestRouteAdapter } from '../adapters/nest-route-adapter';
+import { NestRouteAdapter } from 'src/main/adapters/nest-route-adapter';
 
 @Controller()
 export class ProductsController {

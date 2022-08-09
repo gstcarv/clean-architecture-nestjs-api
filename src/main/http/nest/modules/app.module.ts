@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductHandlerModule } from 'src/application/handlers/product-handler.module';
-import { config } from '../config';
+import { config } from 'src/main/config';
 import { ProductsController } from '../controllers/products.controller';
 
 @Module({

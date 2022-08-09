@@ -44,6 +44,6 @@ describe('Get product by ID handler', () => {
 
         expect(getProductByIdUCMock.perform).toHaveBeenCalledWith('1');
         expect(promise.statusCode).toBe(HttpStatusCodes.NOT_FOUND);
-        expect(promise.data).toBeInstanceOf(EntityNotFoundError);
+        expect(promise.error).toBeInstanceOf(EntityNotFoundError);
     });
 });
